@@ -217,7 +217,7 @@ Queue.prototype.startAgain = function() {
     this.startListener();
   }
 
-  return;
+  return RSVP.resolve();
 };
 
 module.exports = Queue;
