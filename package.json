@@ -27,8 +27,8 @@
       "email": "mcdonald@firebase.com"
     }
   ],
-  "repository": "https://github.com/firebase/firebase-queue.git",
-  "homepage": "https://github.com/firebase/firebase-queue",
+  "repository": "https://github.com/crystalin/firebase-queue.git",
+  "homepage": "https://github.com/crystalin/firebase-queue",
   "main": "dist/queue.js",
   "files": [
     "dist/lib/**",
