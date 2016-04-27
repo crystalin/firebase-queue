@@ -150,6 +150,13 @@ function Queue() {
     ));
   }
 
+  this.startListener();
+  return self;
+}
+
+Queue.prototype.startListener = function() {
+  var self = this;
+
   if (_.isUndefined(self.specId)) {
     for (var j = 0; j < self.numWorkers; j++) {
       self.workers[j].setTaskSpec(DEFAULT_TASK_SPEC);
@@ -177,10 +184,7 @@ function Queue() {
           err.message);
       });
   }
-
-  return self;
-}
-
+};
 
 /**
  * Gracefully shuts down a queue.
@@ -200,6 +204,20 @@ Queue.prototype.shutdown = function() {
   return RSVP.all(_.map(self.workers, function(worker) {
     return worker.shutdown();
   }));
+};
+
+Queue.prototype.startAgain = function() {
+  var self = this;
+
+  logger.debug('Queue: Restarting');
+  if (_.isNull(self.specChangeListener)) {
+    _.each(self.workers, function(worker) {
+      return worker.startAgain();
+    });
+    this.startListener();
+  }
+
+  return;
 };
 
 module.exports = Queue;

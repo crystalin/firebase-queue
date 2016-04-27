@@ -751,4 +751,16 @@ QueueWorker.prototype.shutdown = function() {
   return self.shutdownDeferred.promise;
 };
 
+QueueWorker.prototype.startAgain = function() {
+  var self = this;
+
+  logger.debug(self._getLogEntry('resuming'));
+
+  // We can report success immediately if we're not busy
+  if (self.shutdownDeferred) {
+    self.shutdownDeferred = null;
+    logger.debug(self._getLogEntry('finished resuming'));
+  }
+};
+
 module.exports = QueueWorker;
